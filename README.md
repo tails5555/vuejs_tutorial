@@ -14,12 +14,14 @@ Vue.js 에 대하여 세부적인 기능을 공부하기 위해 읽었다면 조
 
 0. MVC, MV*, MVVM
    
-1. Vue.js 시작하기
+1. [Vue.js 시작하기](https://github.com/tails5555/vuejs_tutorial/blob/master/docs/note_01.md)
    
-2. vue 파일 구성 요소
+2. [Vue 파일 구성 요소](https://github.com/tails5555/vuejs_tutorial/blob/master/docs/note_02.md)
    
-3. Vue Instance
+3. [Vue Instance](https://github.com/tails5555/vuejs_tutorial/blob/master/docs/note_03.md)
    
-4. Instance Life Cycle
+4. [Vue Component](https://github.com/tails5555/vuejs_tutorial/blob/master/docs/note_04.md)
+
+5. Component 의 상하 관계 및 Props
 
 계속 이어집니다.
