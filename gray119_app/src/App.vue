@@ -1,28 +1,23 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div id="main">
+    <MainView />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import { LyricView, SearchView, MainView } from './pages';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MainView, LyricView, SearchView
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style> 
+#main {
+  background: url("./images/119_background.jpg") no-repeat center center fixed;
+  color: #FFFFFF;
 }
 </style>
