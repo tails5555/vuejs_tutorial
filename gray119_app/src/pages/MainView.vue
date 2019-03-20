@@ -7,7 +7,6 @@
 
 <script>
 export default {
-  name: 'MainView',
   data () {
     return {
       msg: '119 Remix'
