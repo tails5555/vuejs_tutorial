@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>정렬 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>우리들의 과일 가게</h1>
+            <hr/>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">
+                            과일
+                            <input class="form-control" v-model="keyword" />
+                        </th>
+                        <th scope="col">
+                            가격
+                            <input class="form-control" v-model.number="price" />
+                        </th>
+                        <th scope="col">
+                            수량
+                            <input class="form-control" v-model.number="qualify" />
+                        </th>
+                    </tr>
+                    <tr v-for="fruit in filtering">
+                        <td>{{ fruit.name }}</td>
+                        <td>{{ fruit.price }}</td>
+                        <td>{{ fruit.qualify }}</td>
+                    </tr>
+                </thead>
+            </table>
+            <hr/>
+            <template v-if="name_sort === '' || name_sort === 'NAME_DESC'">
+                <button type="button" class="btn btn-primary" @click="sorting('NAME_ASC')">이름 오름차순</button>
+            </template>
+            <template v-else>
+                <button type="button" class="btn btn-primary" @click="sorting('NAME_DESC')">이름 내림차순</button>
+            </template>
+            <template v-if="price_sort === '' || price_sort === 'PRICE_DESC'">
+                <button type="button" class="btn btn-primary" @click="sorting('PRICE_ASC')">가격 오름차순</button>
+            </template>
+            <template v-else>
+                <button type="button" class="btn btn-primary" @click="sorting('PRICE_DESC')">가격 내림차순</button>
+            </template>
+            <template v-if="qualify_sort === '' || qualify_sort === 'QUALIFY_DESC'">
+                <button type="button" class="btn btn-primary" @click="sorting('QUALIFY_ASC')">수량 오름차순</button>
+            </template>
+            <template v-else>
+                <button type="button" class="btn btn-primary" @click="sorting('QUALIFY_DESC')">수량 내림차순</button>
+            </template>
+            <br/>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            fruits: [
+                { name : '사과', price : 400, qualify : 30 },
+                { name : '포도', price : 300, qualify : 40 },
+                { name : '무화과', price : 100, qualify : 110 },
+                { name : '복숭아', price : 200, qualify : 20 },
+                { name : '망고', price : 500, qualify : 60 },
+                { name : '참외', price : 800, qualify : 50 },
+                { name : '멜론', price : 700, qualify : 70 },
+                { name : '수박', price : 900, qualify : 90 },
+                { name : '딸기', price : 600, qualify : 80 },
+                { name : '파인애플', price : 1100, qualify : 100 },
+                { name : '바나나', price : 1000, qualify : 10 }
+            ],
+            
+            keyword: '',
+            price: 0,
+            qualify: 0,
+            
+            name_sort : '',
+            price_sort : '',
+            qualify_sort : ''    
+        },
+        methods: {
+            sorting : function(keyword) {
+                if(keyword.includes("NAME")) {
+                    this.name_sort = keyword;
+                    this.price_sort = '';
+                    this.qualify_sort = '';
+                } else if(keyword.includes("PRICE")) {
+                    this.name_sort = '';
+                    this.price_sort = keyword;
+                    this.qualify_sort = '';
+                } else if(keyword.includes("QUALIFY")) {
+                    this.name_sort = '';
+                    this.price_sort = '';
+                    this.qualify_sort = keyword;
+                } else {
+                    this.name_sort = '';
+                    this.price_sort = '';
+                    this.qualify_sort = '';
+                }
+            }
+        },
+        computed: {
+            filtering : function() {
+                const fruits = this.fruits.slice();
+                const { name_sort, price_sort, qualify_sort, keyword, price, qualify } = this;
+                
+                if(name_sort !== '') {
+                    if(name_sort.includes('ASC')) {
+                        fruits.sort((o1, o2) => o1.name.localeCompare(o2.name));
+                    } else {
+                        fruits.sort((o1, o2) => o2.name.localeCompare(o1.name));
+                    }
+                } 
+                
+                if(price_sort !== '') {
+                    if(price_sort.includes('ASC')) {
+                        fruits.sort((o1, o2) => o1.price - o2.price);
+                    } else {
+                        fruits.sort((o1, o2) => o2.price - o1.price);
+                    }
+                } 
+                
+                if(qualify_sort !== '') {
+                    if(qualify_sort.includes('ASC')) {
+                        fruits.sort((o1, o2) => o1.qualify - o2.qualify);
+                    } else {
+                        fruits.sort((o1, o2) => o2.qualify - o1.qualify);
+                    }
+                }
+
+                return fruits.filter(fruit => fruit.name.includes(keyword) && fruit.price >= price && fruit.qualify >= qualify)
+            }
+        }
+    })
+</script>
+</html>

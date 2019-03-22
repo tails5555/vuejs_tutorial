@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>컴포넌트 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>컴포넌트 생성</h1>
+            <hr/>
+            <my-component></my-component>
+            <your-component></your-component>
+            <message-component message="hello"></message-component>
+
+            <song-component :song="{ title: '난 널 원해', singer: '드렁큰타이거' }"></song-component>
+            <song-component :song="{ title: '신사동 그 사람', singer: '주현미' }"></song-component>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+
+<script type="text/template" id="script_template">
+    <h1>Hi, Component!</h1>
+</script>
+
+<script type="text/template" id="song-template">
+    <h2>{{ song.title }} - {{ song.singer }}</h2>
+</script>
+
+<script>
+    Vue.component('my-component', {
+        template: '<h1>Hello, Component!</h1>'
+    });
+    
+    Vue.component('your-component', {
+        template: '#script_template'
+    });
+
+    Vue.component('message-component', {
+        props: ['message'],
+        template: '<h2>{{ message }}</h2>'
+    });
+
+    Vue.component('song-component', {
+        props: ['song'],
+        template: '#song-template'
+    });
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>

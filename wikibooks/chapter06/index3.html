@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>사용자 필터링 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>우리들의 과일 가게2</h1>
+            <hr/>
+            <ul class="list-group">
+                <li v-for="fruit in fruits" class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ fruit | led }}
+                </li>
+            </ul>
+            <br/>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    Vue.filter('led', (fruit) => `${fruit.name} 1개에 ${fruit.price} 원! ${fruit.qualify} 개 남았습니다.!`)
+    new Vue({
+        el: '#app',
+        data: {
+            fruits: [
+                { name : '사과', price : 400, qualify : 30 },
+                { name : '포도', price : 300, qualify : 40 },
+                { name : '무화과', price : 100, qualify : 110 },
+                { name : '복숭아', price : 200, qualify : 20 },
+                { name : '망고', price : 500, qualify : 60 },
+                { name : '참외', price : 800, qualify : 50 },
+                { name : '멜론', price : 700, qualify : 70 },
+                { name : '수박', price : 900, qualify : 90 },
+                { name : '딸기', price : 600, qualify : 80 },
+                { name : '파인애플', price : 1100, qualify : 100 },
+                { name : '바나나', price : 1000, qualify : 10 }
+            ]  
+        }
+    })
+</script>
+</html>

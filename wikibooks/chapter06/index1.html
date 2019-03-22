@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>필터링 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>119 Remix</h1>
+            <hr/>
+            <div id="jay_park_119" style="margin : 10px;">
+                <div class="alert alert-info" role="alert">
+                    박재범 Verses
+                </div>
+                <ul class="list-group">
+                    <li v-for="verse in findByArtist('박재범')" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ verse.lyric }}
+                    </li>
+                </ul>
+            </div>
+            <div id="simon_dominic_119" style="margin : 10px;">
+                <div class="alert alert-info" role="alert">
+                    쌈디 Verses
+                </div>
+                <ul class="list-group">
+                    <li v-for="verse in findByArtist('쌈디')" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ verse.lyric }}
+                    </li>
+                </ul>
+            </div>
+            <div id="sik_k_119" style="margin : 10px;">
+                <div class="alert alert-info" role="alert">
+                    Sik-k Verses
+                </div>
+                <ul class="list-group">
+                    <li v-for="verse in sik_k_verse" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ verse.lyric }}
+                    </li>
+                </ul>
+            </div>
+            <div id="search_119" style="margin : 10px;">
+                <div class="alert alert-warning" role="alert">
+                    Verses 나 Artists 로 검색
+                </div>
+                <input v-model="keyword" class="form-control" style="margin : 10px;" />
+                <ul class="list-group">
+                    <li v-for="verse in search_keyword" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ verse.lyric }} - {{ verse.artist }}
+                    </li>
+                </ul>
+            </div>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            verses: [
+                { artist : '박재범', lyric : "We the motha fuckin' gang bro" },
+                { artist : '쌈디', lyric : "A.m. to p.m. 짙어지는 나의 비음" },
+                { artist : '박재범', lyric : "We mobbin' deep" },
+                { artist : 'LOCO', lyric : "Ya, ya, 여기저기 불 피워 웃으며 VV 치즈해" },
+                { artist : '쌈디', lyric : "왕 싸가지 느낌, 이게 원래 main theme" },
+                { artist : 'LOCO', lyric : "다시 또 VV 치즈해, 날라가는 표정" },
+                { artist : '우원재', lyric : "랩퍼들은 말을 뱉고 너는 그걸 들어, 빼줘 니 오빠의 lyric" },
+                { artist : 'Sik-k', lyric : "네 여자친구들 중 절반은 내 팬 아니면 권민식의 팬" },
+                { artist : 'HAON', lyric : "Now I wanna be a baki, 자식들은 평화를 원하지 않지" },
+                { artist : '우원재', lyric : "Oh, bitch, check my name, 개학대신 계약 따냈지" },
+                { artist : 'Sik-k', lyric : "911, 그건 나한테 그냥 내 다음 차, skrtt" },
+                { artist : 'HAON', lyric : "말했잖아 wanna be a baki 쉬고 있는 거라니까 잠시" },
+                { artist : 'The Quiett', lyric : "나는 선택받은 자여, yeah, hall of fame like cy young, yeah" },
+                { artist : 'Deepflow', lyric : "이건 불 맛 like a stir fry, 레시피 없던 내 성과" },
+                { artist : 'Deepflow', lyric : "난 열반 like a 석가, 난 평화 like a 성탄" },
+                { artist : 'The Quiett', lyric : "Somebody to suck my dick right now, huh" }
+            ],
+            keyword: ''
+        },
+        methods: {
+            findByArtist : function(artist) {
+                return this.verses.filter(verse => verse.artist === artist);
+            }
+        },
+        computed: {
+            sik_k_verse : function() {
+                return this.verses.filter(verse => verse.artist === 'Sik-k');
+            },
+            search_keyword : function() {
+                const { keyword } = this;
+                return this.verses.filter(verse => verse.artist.includes(keyword) || verse.lyric.includes(keyword))
+            }
+        }
+    })
+</script>
+</html>
