@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Computed 계산기 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>간Yee 계산기 2</h1>
+            <hr/>
+            <form class="form-inline">
+                <input v-model.number="a" class="form-control" v-on:keyup.enter="calculate" />
+                <select v-model="operator" class="form-control">
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                    <option>%</option>
+                </select>
+                <input v-model.number="b" class="form-control" @keyup.enter="calculate" />
+            </form>
+            <h2>결과 : {{ a }} {{ operator }} {{ b }} = {{ c }} </h2>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            a : 10, b : 20, operator : '+'
+        },
+        computed: {
+            c : function() {
+                switch(this.operator) {
+                    case '+' :
+                        return this.a + this.b;
+                        break;
+                    case '-' :
+                        return this.a - this.b;
+                        break;
+                    case '*' :
+                        return this.a * this.b;
+                        break;
+                    case '/' :
+                        return this.a / this.b;
+                        break;
+                    case '%' :
+                        return this.a % this.b;
+                        break;
+                }
+            }
+        }
+    })
+</script>
+<!-- 참고로 computed 로 계산된 변수는 data 에 절대로 안 들어온다! -->
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>투표 시스템</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>투표 시스템</h1>
+            <ul class="list-group">
+                <li v-for="(candidate, idx) in candidates" class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ idx + 1 }}. {{ candidate.name }} {{ candidate.votes }}
+                    <button v-bind:id="idx" @click="voting" class="btn btn-primary">선거하기</button>
+                </li>
+            </ul>
+            <input v-model="message" class="form-control" @keyup.enter="command" />
+            <hr/>
+            <h2>승자는 {{ winner }} 입니다!</h2>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            candidates : [
+                { name : '스윙스', votes : 123 },
+                { name : '기리보이', votes : 23 },
+                { name : '저스디스', votes: 12 },
+                { name : '재키와이', votes: 24 },
+                { name : '키드밀리', votes: 25 }
+            ],
+            message : ''
+        },
+        methods: {
+            voting: function(event) {
+                const { id } = event.target;
+                this.candidates[parseInt(id)].votes += 1;
+            },
+            command: function() {
+                if(this.message === 'delete'){
+                    for(k in this.candidates) {
+                        this.candidates[k].votes = 0;
+                    }
+                }
+            }
+        },
+        computed: {
+            winner : function() {
+                const arr = this.candidates.slice();
+                arr.sort((a, b) => b.votes - a.votes);
+                return arr[0].name;
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>v-on 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Counters</h1>
+            <hr/>
+            <button class="btn btn-block btn-primary" v-on:click="cnts1++">
+                Counter1 ({{ cnts1 }})
+            </button>
+            <button class="btn btn-block btn-primary" v-on:click="counting">
+                Counter2 ({{ cnts2 }})
+            </button>
+            <!-- v-on: 만 @ 로 축약할 수 있음.-->
+            <button class="btn btn-block btn-primary" @click="counting">
+                Counter2 Copy ({{ cnts2 }})
+            </button>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cnts1: 0,
+            cnts2: 0,
+        },
+        methods: {
+            counting: function() {
+                this.cnts2++;
+            }
+        }
+    })
+</script>
+</html>

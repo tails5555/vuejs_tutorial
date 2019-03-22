@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>v-on 계산기 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>간Yee 계산기</h1>
+            <hr/>
+            <form class="form-inline">
+                <!-- v-model 뒤의 . 은 데이터 형식을 지정하는 것이다. -->
+                <!-- 실행 결과는 A 와 B 는 입력하면 즉시 바뀌지만, C 는 submit 버튼을 클릭해야 결과 값이 반영된다. -->
+                <!-- 참고로 submit 이 있는 모든 프레임워크에서는 event.preventDefault() 를 사용하여 이벤트 버블링을 진행해야 한다. -->
+                <input v-model.number="a" class="form-control" v-on:keyup.enter="calculate" />
+                <select v-model="operator" class="form-control">
+                    <option>+</option>
+                    <option>-</option>
+                    <option>*</option>
+                    <option>/</option>
+                    <option>%</option>
+                </select>
+                <input v-model.number="b" class="form-control" @keyup.enter="calculate" />
+                <button type="submit" @click="calculate" class="btn btn-primary">
+                    계산하기
+                </button>
+                <!-- 이를 사용해도 됩니다. 안에 있는 event.preventDefault() 를 삭제해도 무방합니다. -->
+                <!--
+                    <button type="submit" @click.prevent="calculate" class="btn btn-primary">
+                        계산하기
+                    </button>
+                -->
+            </form>
+            <h2>결과 : {{ a }} {{ operator }} {{ b }} = {{ c }} </h2>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            a : 10, b : 20, operator : '+', c : null
+        },
+        methods: {
+            calculate: function(event) {
+                event.preventDefault();
+                switch(this.operator) {
+                    case '+' :
+                        this.c = this.a + this.b;
+                        break;
+                    case '-' :
+                        this.c = this.a - this.b;
+                        break;
+                    case '*' :
+                        this.c = this.a * this.b;
+                        break;
+                    case '/' :
+                        this.c = this.a / this.b;
+                        break;
+                    case '%' :
+                        this.c = this.a % this.b;
+                        break;
+                }
+            }
+        }
+    })
+</script>
+</html>

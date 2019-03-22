@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>양방향 바인딩</title>
+</head>
+<!-- 입력 이벤트에 대한 동기화를 양방향 바인딩을 통해 진행한다. -->
+<!-- React 에서는 handle 함수를 사용하여 계속 갱신해서 사용했다. -->
+<body>
+    <div id="app">
+        <h1>양방향 바인딩</h1>
+        <h1>{{ message }}</h1>
+        <input v-model="message" />
+        <h1>{{ text }}</h1>
+        <input v-model="text" />
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: "Hello, Vue.js!",
+            text: "하히후헤호"
+        }
+    })
+</script>
+</html>

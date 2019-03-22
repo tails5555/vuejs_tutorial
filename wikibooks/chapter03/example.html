@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>3장 연습문제01</title>
+</head>
+<body>
+    <div id="app">
+        <template v-if="belong === 'Indigo Music'">
+            <h1>안녕하세요? 인디고 뮤직 {{ name }} 님!</h1>
+        </template>
+        <template v-else-if="belong === 'Just Music'">
+            <h1>안녕하세요? 저스트 뮤직 {{ name }} 님!</h1>
+        </template>
+        <template v-else>
+            <h1>소속사는 Indigo Music, Just Music 중에서만 가능합니다.</h1>
+        </template>
+        <p>소속 레이블을 입력하세요.</p>
+        <input v-model="belong" />
+        <p>래퍼 이름을 입력하세요.</p>
+        <input v-model="name" />
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            belong: "Indigo Music",
+            name: "저스디스"
+        }
+    })
+</script>
+</html>

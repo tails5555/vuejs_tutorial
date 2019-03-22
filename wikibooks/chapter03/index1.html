@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>v-show 예제</title>
+</head>
+<body>
+    <div id="app">
+        <h1>textarea 를 입력하세요.</h1>
+        <textarea v-model="message"></textarea>
+        <!-- data 의 프로퍼티 데이터의 값이 Truthy Value 이면 제출하기 버튼이 보인다. -->
+        <!-- 이는 CSS 의 display 속성을 토글하는 원리로 사용된다. textarea 에 글자가 없으면 none 으로 바뀐다. -->
+        <button v-show="message">
+            제출하기
+        </button>
+        <!-- Vue.js 와 관련된 변수는 $ 를 사용하여 가져온다. -->
+        <pre>{{ $data }}</pre>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: "하히후헤호"
+        }
+    })
+</script>
+</html>

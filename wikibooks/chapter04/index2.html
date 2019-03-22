@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>v-for 예제(2)</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>AOMG H1ghr Music</h1>
+            <ul class="list-group">
+                <!-- idx 는 0번부터. member 는 배열 안의 객체! -->
+                <li v-for="(member, idx) in members" class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ idx + 1 }}. {{ member.name }}
+                    <span class="badge badge-primary badge-pill">{{ member.belong }}</span>
+                </li>
+            </ul>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            members: [
+                { belong : 'AOMG', name : 'Jay Park' },
+                { belong : 'AOMG', name : 'GRAY' },
+                { belong : 'AOMG', name : 'LOCO' },
+                { belong : 'H1ghr Music', name : 'Sik-K' },
+                { belong : 'H1ghr Music', name : 'pH-1' }
+            ]
+        }
+    })
+</script>
+</html>

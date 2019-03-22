@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>단방향 바인딩</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h2>{{ 10 + 20 }}</h2>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: "Hello, Vue.js!"
+        }
+    })
+</script>
+</html>

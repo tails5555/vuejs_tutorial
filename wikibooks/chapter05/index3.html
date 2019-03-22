@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Computed Properties 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h2>결과 : a = {{ a }}, b = {{ b }}</h2>
+            <input v-model="a" />
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            a : 1
+        },
+        computed: {
+            b : function() {
+                return parseInt(this.a) + 1;
+            }
+        }
+    })
+</script>
+<!-- computed 는 data 안에 있는 데이터를 가공하여 반환한다. -->
+<!-- 이에 해당되는 값은 변경할 수 없고 이는 Read-Only 이다. -->
+<!-- 데이터 형식을 맞춰줘야 올바른 값이 나온다. 이는 parseFloat(), parseInt() 함수를 사용하자. -->
+</html>

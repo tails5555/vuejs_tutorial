@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>2장 연습문제01</title>
+</head>
+<body>
+    <div id="app">
+        <h1>안녕하세요, {{ name }} 님?</h1>
+        <div id="form">
+            <label>이름을 입력하길 바라요.</label>
+            <input v-model="name" />
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: "강인성"
+        }
+    })
+</script>
+</html>

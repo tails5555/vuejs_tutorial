@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>v-if 예제</title>
+</head>
+<!-- 
+    v-if 와 v-show 의 차이?
+    v-if 는 토글 비용이 높고, v-show 는 초기 렌더링 비용이 높다.
+    v-if 는 런타임 조건이 자주 변경될 가능성이 낮으면 이를 사용하고,
+    v-show 는 무언가를 자주 토글하는 경우(존재 여부만 파악하면 됨)에 사용한다.
+-->
+<body>
+    <div id="app">
+        <h1>textarea 를 입력하세요.</h1>
+        <!-- template 는 React 의 Fragment 와 같은 역할을 한다. -->
+        <template v-if="!message">
+            <h3>Textarea 에 글자를 넣길 바라요.</h3>
+        </template>
+        <template v-else-if="message.includes('선택받은자')">
+            <h3>네, 저는 선택 받은 자에요.</h3>
+        </template>
+        <template v-else-if="message.includes('불')">
+            <h3>불 같이 벌어, 불 같이 털고</h3>
+        </template>
+        <template v-else>
+            <h3>올바른 내용들을 작성하셨네요.</h3>
+        </template>
+        <textarea v-model="message"></textarea>
+        <pre>{{ $data }}</pre>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: "하히후헤호"
+        }
+    })
+</script>
+</html>
