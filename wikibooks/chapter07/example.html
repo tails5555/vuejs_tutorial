@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>WYBH App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>우주비행 App</h1>
+            <hr/>
+            <div id="planet_list" style="margin : 10px;">
+                <ul class="list-group">
+                    <planet v-for="planet in planets" :planet="planet"></planet>
+                </ul>
+            </div>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <template id="planet-template">
+        <ul class="list-group">
+            <li class="list-group-item">
+                {{ planet.name }} : {{ planet.count }} Visited.
+                <button v-show="!isFilled" @click="visiting" class="btn btn-primary">
+                    Visit
+                </button>
+                <span v-if="isVisited === true" class="fas fa-rocket d-flex justify-content-end">
+                </span>
+            </li>
+        </ul>
+    </template>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    Vue.component('planet', {
+        template: '#planet-template',
+        props: ['planet'],
+        methods: {
+            visiting: function() {
+                this.planet.count += 1;
+            }
+        },
+        computed: {
+            isVisited: function() {
+                return this.planet.count > 0;
+            },
+            isFilled: function() {
+                return this.planet.count === 3;
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            planets: [
+                { name : '지구', count: 0 },
+                { name : '화성', count: 1 },
+                { name : '목성', count: 1 },
+                { name : '남한산성', count: 2 },
+                { name : '만리장성', count: 1 }
+            ],
+        }
+    })
+</script>
+</html>
