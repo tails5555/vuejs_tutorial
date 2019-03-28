@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>필터링 컴포넌트 off로 개선</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>119 Remix</h1>
+            <hr/>
+            <div id="search_119" style="margin : 10px;">
+                <div class="alert alert-warning" role="alert">
+                    Verses 나 Artists 로 검색
+                </div>
+                <input v-model="keyword" class="form-control" style="margin : 10px;" />
+                <ul class="list-group">
+                    <verse v-for="verse in search_keyword" :verse="verse" :favorite="favorite" @update="updateFavorite"></verse>
+                </ul>
+            </div>
+            <pre>
+                <code>
+                    {{ $data }}
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <template id="verse-template">
+        <ul class="list-group">
+            <li class="list-group-item">
+                {{ verse.lyric }} - {{ verse.artist }}
+                <button @click="view" class="btn btn-primary">
+                    Alert
+                </button>
+                <button v-show="!isFavorite" @click="fav_update" class="btn btn-primary">
+                    Favorite
+                </button>
+                <span v-if="isFavorite === true" class="fas fa-star d-flex justify-content-end">
+                </span>
+            </li>
+        </ul>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    Vue.component('verse', {
+        template: '#verse-template',
+        props: ['verse', 'favorite'],
+        methods: {
+            view: function() {
+                const { artist, lyric } = this.verse;
+                alert(`${artist} : ${lyric}`);
+            },
+            fav_update: function() {
+                this.$emit('update', this.verse);
+            }
+        },
+        computed: {
+            isFavorite: function() {
+                const verseJSON = JSON.stringify(this.verse);
+                const favoriteJSON = JSON.stringify(this.favorite);
+                return verseJSON === favoriteJSON;
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            verses: [
+                { artist : '박재범', lyric : "We the motha fuckin' gang bro" },
+                { artist : '쌈디', lyric : "A.m. to p.m. 짙어지는 나의 비음" },
+                { artist : '박재범', lyric : "We mobbin' deep" },
+                { artist : 'LOCO', lyric : "Ya, ya, 여기저기 불 피워 웃으며 VV 치즈해" },
+                { artist : '쌈디', lyric : "왕 싸가지 느낌, 이게 원래 main theme" },
+                { artist : 'LOCO', lyric : "다시 또 VV 치즈해, 날라가는 표정" },
+                { artist : '우원재', lyric : "랩퍼들은 말을 뱉고 너는 그걸 들어, 빼줘 니 오빠의 lyric" },
+                { artist : 'Sik-k', lyric : "네 여자친구들 중 절반은 내 팬 아니면 권민식의 팬" },
+                { artist : 'HAON', lyric : "Now I wanna be a baki, 자식들은 평화를 원하지 않지" },
+                { artist : '우원재', lyric : "Oh, bitch, check my name, 개학대신 계약 따냈지" },
+                { artist : 'Sik-k', lyric : "911, 그건 나한테 그냥 내 다음 차, skrtt" },
+                { artist : 'HAON', lyric : "말했잖아 wanna be a baki 쉬고 있는 거라니까 잠시" },
+                { artist : 'The Quiett', lyric : "나는 선택받은 자여, yeah, hall of fame like cy young, yeah" },
+                { artist : 'Deepflow', lyric : "이건 불 맛 like a stir fry, 레시피 없던 내 성과" },
+                { artist : 'Deepflow', lyric : "난 열반 like a 석가, 난 평화 like a 성탄" },
+                { artist : 'The Quiett', lyric : "Somebody to suck my dick right now, huh" },
+                { artist : 'Swings', lyric : "나는 힙합 백종원, 단지 조금 더 Cocky" }
+            ],
+            favorite : {},
+            keyword: ''
+        },
+        methods: {
+            updateFavorite: function(verse){
+                this.favorite = verse;
+            }
+        },
+        computed: {
+            search_keyword : function() {
+                const { keyword } = this;
+                return this.verses.filter(verse => verse.artist.includes(keyword) || verse.lyric.includes(keyword))
+            }
+        }
+    })
+</script>
+</html>

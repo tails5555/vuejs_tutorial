@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>on, emit 예제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container text-center">
+            <p style="font-size: 140px;">{{ votes }}</p>
+            <button class="btn btn-primary" @click="vote">Vote</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            votes: 0
+        },
+        methods: {
+            vote: function(writer) {
+                this.$emit('voted')
+            },
+        },
+        created () {
+            this.$on('voted', function(btn) {
+                this.votes += 1;
+            }
+        )}
+    })
+</script>
+</html>

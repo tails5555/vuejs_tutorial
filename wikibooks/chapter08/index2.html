@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Component In @event</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container text-center">
+            <p style="font-size: 140px;">{{ votes }}</p>
+            <div class="row">
+                <!-- 부모 이벤트인 countVote 를 자식 컴포넌트에게 전달한다. -->
+                <rapper @voted="countVote" name="기리보이"></rapper>
+                <rapper @voted="countVote" name="저스디스"></rapper>
+                <rapper @voted="countVote" name="한요한"></rapper>
+            </div>
+            <br/>
+            <h1>LOG</h1>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="log in logs">
+                    {{ log }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <template id="rapper-template">
+        <div class="text-center col-lg-4">
+            <p style="font-size: 40px;">{{ votes }}</p>
+            <button class="btn btn-primary" @click="vote">{{ name }}</button>
+        </div>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    Vue.component('rapper', {
+        template: "#rapper-template",
+        props: ['name'],
+        data: function() {
+            return {
+                votes: 0
+            }
+        },
+        methods: {
+            vote: function(event) {
+                this.votes += 1;
+                this.$emit('voted', event.srcElement.textContent); // 부모 컴포넌트에서 얻어온 이벤트를 실행한다.
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            votes: 0,
+            logs : []
+        },
+        methods: {
+            countVote: function(rapper) {
+                this.votes += 1;
+                this.logs.push(`${rapper} 는 저희와 함께 갑시다!`);
+            },
+        }
+    })
+</script>
+</html>

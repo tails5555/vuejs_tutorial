@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Component With Bus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container text-center">
+            <h1>쇼미더머니 777</h1>
+            <p style="font-size: 140px;">{{ votes.count }}</p>
+            <button class="btn btn-warning" @click="reset">재시작</button>
+            <hr/>
+            <div class="row">
+                <rapper @voted="countVote" name="기리보이"></rapper>
+                <rapper @voted="countVote" name="저스디스"></rapper>
+                <rapper @voted="countVote" name="한요한"></rapper>
+            </div>
+            <hr/>
+            <h1>LOG</h1>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="log in votes.logs">
+                    {{ log }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <template id="rapper-template">
+        <div class="text-center col-lg-4">
+            <p style="font-size: 40px;">{{ votes }}</p>
+            <button class="btn btn-primary" @click="vote">{{ name }}</button>
+        </div>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="script.js"></script>
+</html>

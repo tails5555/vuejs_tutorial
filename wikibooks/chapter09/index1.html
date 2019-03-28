@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Class Bindin' 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+    .red {
+        background: #FF0000;
+    }
+    .blue {
+        background: #0000FF;
+    }
+    .purple {
+        background: #7B1FA2;
+    }
+    .green {
+        background: #4CAF50;
+    }
+    .box {
+        float: left;
+        width: 200px;
+        height: 200px;
+        margin: 40px;
+        border: 1px solid rgba(0, 0, 0, .2);
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container text-center">
+            <!-- Class 이름 뒤에 부울 대수를 통하여 사용 여부를 지정한다. -->
+            <div class="box" v-bind:class="{ 'red': color, 'blue': !color }"></div>
+            <div class="box" v-bind:class="{ 'blue': color, 'green': !color }"></div>
+            <div class="box" v-bind:class="{ 'red': color, 'blue': !color }"></div>
+            <div class="box" v-bind:class="{ 'purple': color, 'green': !color }"></div>
+            <button v-on:click="flip_color" class="btn btn-block btn-success">Flip Color!</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+    el: '#app',
+    data: {
+        color: true
+    },
+    methods: {
+        flip_color: function() {
+            this.color = !this.color
+        }
+    }
+});
+</script>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>8장 연습문제</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container text-center">
+            <h1>Chariot Shopping</h1>
+            <ul class="list-group">
+                <chariot v-for="chariot in chariots" :chariot="chariot" :selected="selected" @select="selected_update"></chariot>
+            </ul>
+        </div>
+    </div>
+    <template id="chariot-template">
+        <li class="list-group-item">
+            "{{ chariot.name }}" chariot has {{ chariot.count }} horse(s)!
+            <button :disabled="!btn_obj.active" @click="update_selected_element" class="btn btn-primary">
+                {{ btn_obj.message }}
+            </button>
+        </li>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="script.js"></script>
+</html>

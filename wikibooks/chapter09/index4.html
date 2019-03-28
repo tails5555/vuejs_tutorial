@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+    .completed {
+        text-decoration: line-through;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul class="list-group">
+            <li class="list-group-item" :class="{ 'completed' : task.done }" :style="style_obj" v-for="task in tasks">
+                {{ task.body }}
+                <button @click="complete_task(task)" class="btn btn-primary">체크</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+    el: '#app',
+    data: {
+        tasks: [
+            { body: '돈가스 먹으러 가기', done: false },
+            { body: '키드밀리 괴롭히러 가기', done: false },
+            { body: '짐티피 가서 운동하기', done: true }
+        ],
+        style_obj: {
+            fontSize: '25px'
+        }
+    },
+    methods: {
+        complete_task: function(task) {
+            task.done = !task.done
+        }
+    }
+});
+</script>
+</html>
