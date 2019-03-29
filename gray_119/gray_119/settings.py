@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'gray_119.urls'
@@ -127,11 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:8000',
-    'localhost:3000',
-    'localhost:19001',
-    '127.0.0.1:3000',
-    '127.0.0.1:8000',
-    '127.0.0.1:19001'
-)
+CORS_ORIGIN_ALLOW_ALL = True 

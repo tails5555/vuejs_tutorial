@@ -10,6 +10,7 @@ class Musician(models.Model) :
     main_name = models.CharField(max_length=10, null=False, default='')
     main_label = models.ForeignKey(Label, on_delete=models.CASCADE)
     birthday = models.DateField()
+    votes = models.IntegerField(null=False, default=0)
 
 class Profile(models.Model) :
     musician = models.OneToOneField(Musician, on_delete=models.CASCADE)

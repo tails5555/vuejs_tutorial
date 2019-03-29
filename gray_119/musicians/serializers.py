@@ -9,7 +9,7 @@ class LabelSerializer(serializers.ModelSerializer) :
 class MusicianSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Musician
-        fields = ('id', 'aka_name', 'main_name', 'main_label', 'birthday', )
+        fields = ('id', 'aka_name', 'main_name', 'main_label', 'birthday', 'votes',)
 
 class ProfileSerializer(serializers.ModelSerializer) :
     class Meta :
