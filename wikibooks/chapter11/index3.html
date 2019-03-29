@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapper With Table Cmp 2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Rapper With Label 2</h1>
+            <hr/>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>IMAGE</th>
+                        <th>AKA NAME</th>
+                        <th>MAIN NAME</th>
+                        <th>BIRTHDAY</th>
+                        <th>LABEL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="rapper in rappers" is="rapper" :rapper="rapper"></tr>
+                </tbody>
+            </table>
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+    <template id="rapper-template">
+        <tr>
+            <td><img class="mr-3" :src="image_url" alt="Rapper Image" width="64px" /></td>
+            <td>{{ rapper.aka_name }}</td>
+            <td>{{ rapper.main_name }}</td>
+            <td>{{ rapper.birthday }}</td>
+            <td>{{ own_label }}</td>
+            <td><button class="btn btn-primary" @click="upvote_rapper(rapper)">{{ rapper.votes }}</button></td>
+        </tr>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="script2.js"></script>
+</html>

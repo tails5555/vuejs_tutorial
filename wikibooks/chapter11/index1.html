@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapper View With Media Cmp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Rapper With Label</h1>
+            <hr/>
+            <rapper v-for="rapper in rappers" :rapper="rapper"></rapper>
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+    <template id="rapper-template">
+        <div class="media">
+            <img class="mr-3" :src="image_url" alt="Rapper Image" width="64px" />
+            <div class="media-body">
+                <h5 class="mt-0">{{ rapper.aka_name }} ({{ rapper.main_name }})</h5>
+                {{ own_label }} {{ rapper.birthday }}
+            </div>
+        </div>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="script1.js"></script>
+</html>
