@@ -10,3 +10,4 @@ class Music(models.Model) :
     singer = models.CharField(max_length=100, null=False, default='')
     year = models.IntegerField(null=False, default=1900)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    hearts = models.IntegerField(null=False, default=0)
