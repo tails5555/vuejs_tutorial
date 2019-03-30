@@ -1,0 +1,124 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music CRUD App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>MUSIC APP</h1>
+            <hr/>
+
+            <div class="btn-group" style="margin: 10px">
+                <button v-if="!form_data.creating" @click="add_music" class="btn btn-info">
+                    <i class="fas fa-plus"></i> ADD
+                </button>
+                <button v-if="form_data.creating" @click="create_music" class="btn btn-success">
+                    <i class="fas fa-check"></i> OK
+                </button>
+                <button v-if="form_data.creating" @click="closing_create" class="btn btn-danger">
+                    <i class="fas fa-times"></i> CANCEL
+                </button>
+            </div>
+
+            <form v-if="form_data.creating">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">TITLE</label>
+                    <div class="col-sm-10">
+                        <input v-model="form_data.title" type="text" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">SINGER</label>
+                    <div class="col-sm-10">
+                        <input v-model="form_data.singer" type="text" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">YEAR</label>
+                    <div class="col-sm-10">
+                        <input v-model="form_data.year" type="text" class="form-control"></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">GENRE</label>
+                    <div class="col-sm-10">
+                        <select v-model="form_data.genre" class="form-control">
+                            <option v-for="genre in genres" :value="genre">{{ genre.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>TITLE</th>
+                        <th>SINGER</th>
+                        <th>YEAR</th>
+                        <th>GENRE</th>
+                        <th>BUTTONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="music in musics" is="music" :music="music" :genres="genres"></tr>
+                </tbody>
+            </table>
+            
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+
+    <template id="music-template">
+        <tr>
+            <td>{{ music.id }}</td>
+            <td>
+                <input v-if="music.editing" v-model="form_data.title" type="text" class="form-control"></input>
+                <span v-else>{{ music.title }}</span>
+            </td>
+            <td>
+                <input v-if="music.editing" v-model="form_data.singer" type="text" class="form-control"></input>
+                <span v-else>{{ music.singer }}</span>
+            </td>
+            <td>
+                <input v-if="music.editing" v-model="form_data.year" type="text" class="form-control"></input>
+                <span v-else>{{ music.year }}</span>
+            </td>
+            <td>
+                <select v-if="music.editing" v-model="form_data.genre" class="form-control">
+                    <option v-for="genre in genres" :value="genre">{{ genre.name }}</option>
+                </select>
+                <span v-else>{{ music.genre.name }}</span>
+            </td>
+            <td>
+                <div v-if="!music.editing" class="btn-group">
+                    <button class="btn btn-danger" @click="plus_heart(music)">
+                        <i class="fas fa-heart"></i> {{ music.hearts }}
+                    </button>
+                    <button class="btn btn-info" @click="editing_music(music)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-warning" @click="delete_music(music)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div v-else class="btn-group">
+                    <button class="btn btn-success" @click="update_music(music)">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-danger" @click="closing_update(music)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+</html>

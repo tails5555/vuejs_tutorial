@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rapper With Table Cmp 3</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Rapper With Label 3</h1>
+            <hr/>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>IMAGE</th>
+                        <th>AKA NAME</th>
+                        <th>MAIN NAME</th>
+                        <th>BIRTHDAY</th>
+                        <th>LABEL</th>
+                        <th>BUTTONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="rapper in rappers" is="rapper" :rapper="rapper"></tr>
+                </tbody>
+            </table>
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+    <template id="rapper-template">
+        <tr>
+            <td><img class="mr-3" :src="image_url" alt="Rapper Image" width="64px" /></td>
+            <td>
+                <input v-if="rapper.editing" v-model="rapper.aka_name" type="text" class="form-control"></input>
+                <span v-else>{{ rapper.aka_name }}</span>
+            </td>
+            <td>
+                <input v-if="rapper.editing" v-model="rapper.main_name" type="text" class="form-control"></input>
+                <span v-else>{{ rapper.main_name }}</span>
+            </td>
+            <td>
+                <input v-if="rapper.editing" v-model="rapper.birthday" type="date" class="form-control"></input>
+                <span v-else>{{ rapper.birthday }}</span>
+            </td>
+            <td>{{ own_label }}</td>
+            <td>
+                <div v-if="!rapper.editing" class="btn-group">
+                    <button class="btn btn-primary" @click="upvote_rapper(rapper)">
+                        <i class="fas fa-vote-yea"></i> {{ rapper.votes }}
+                    </button>
+                    <button class="btn btn-info" @click="editing_rapper(rapper)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div v-else class="btn-group">
+                    <button class="btn btn-success" @click="update_rapper(rapper)">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-danger" @click="rapper.editing = false">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+</html>
