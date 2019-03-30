@@ -1,0 +1,91 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Pagination App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>MUSIC PAGINATION APP</h1>
+            <hr/>
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" v-model="search_req.st" class="form-control"></input>
+                </div>
+
+                <div class="form-group mb-2" style="margin: 0px 5px;">
+                    <select v-model="search_req.ob" class="form-control">
+                        <option value="0">-- 정렬 기준 선택 --</option>
+                        <option value="1">제목 오름차순</option>
+                        <option value="2">제목 내림차순</option>
+                        <option value="3">공감 오름차순</option>
+                        <option value="4">공감 내림차순</option>
+                        <option value="5">연도 오름차순</option>
+                        <option value="6">연도 내림차순</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-2" style="margin: 0px 5px;">
+                    <select v-model="search_req.genre" class="form-control">
+                        <option value="0">-- 장르 선택 --</option>
+                        <option v-for="genre in genres" :value="genre.id">{{ genre.name }}</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-primary mb-2" @click="search_musics">
+                    <i class="fas fa-search"></i> 검색
+                </button>
+                <button v-if="hasInputed === true" type="button" class="btn btn-secondary mb-2" style="margin: 0px 5px;" @click="initialize_search">
+                    <i class="fas fa-sync"></i> 초기화
+                </button>
+            </form>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>TITLE</th>
+                        <th>SINGER</th>
+                        <th>YEAR</th>
+                        <th>GENRE</th>
+                        <th>BUTTONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="music in musics" is="music" :music="music" :genres="genres"></tr>
+                </tbody>
+            </table>
+
+            <div class="text-center" style="margin: 10px;">
+                <button :disabled="!page_req.prev" @click="fetch_musics(page_req.prev)" class="btn btn-info"><i class="fas fa-arrow-left"></i> 이전</button>
+                <span style="margin: 0px 10px;">{{ page_req.pg }} / {{ Math.ceil(page_req.count / 10) }}</span>
+                <button :disabled="!page_req.next" @click="fetch_musics(page_req.next)" class="btn btn-info">다음 <i class="fas fa-arrow-right"></i></button>
+            </div>
+
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+
+    <template id="music-template">
+        <tr>
+            <td>{{ music.id }}</td>
+            <td>{{ music.title }}</td>
+            <td>{{ music.singer }}</td>
+            <td>{{ music.year }}</td>
+            <td>{{ music.genre.name }}</td>
+            <td>
+                <button class="btn btn-danger" @click="plus_heart(music)">
+                    <i class="fas fa-heart"></i> {{ music.hearts }}
+                </button>
+            </td>
+        </tr>
+    </template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.rawgit.com/khalidsalomao/simple-query-string/22cc5bbe/src/simplequerystring.min.js"></script>
+<script src="script.js"></script>
+</html>
